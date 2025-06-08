@@ -7,6 +7,20 @@
     -moz-user-select: none;
     -webkit-user-select: none;
 }
+#devmode{
+    display: block;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #0F0;
+    width: fit-content;
+    padding: 5px;
+    font-size: 2em;
+    border-radius: 20px;
+}
+#devmode a{
+    display: block;
+}
 body{
     text-align: center;
     background-color: #000;

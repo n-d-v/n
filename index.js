@@ -1,3 +1,5 @@
+"use strict";
+
 const submitBtn = document.getElementById("submitBtn");
 const startBtn = document.getElementById("startBtn");
 const nameInput = document.getElementById("nameInput");
@@ -18,6 +20,30 @@ let memoriseList = [];
 let nameToRemember;
 let nameToRememberIdx;
 let gameRunning = false;
+
+if (window.location.toString().split("?").length > 1){
+    if (window.location.toString().split("?")[1].split("=")[0] == "devmode"){
+        console.log("devmode activated");
+        const devmodeDiv = document.getElementById("devmode");
+        const devmodeReloadBtn = document.querySelector("#devmode a");
+        devmodeReloadBtn.href = window.location.toString().split("devmode")[0] + "devmode" + Math.random().toString().slice(2,);
+        devmodeDiv.style.display = "";
+        devmodeReloadBtn.addEventListener("mouseover", () => {
+            devmodeReloadBtn.href = window.location.toString().split("devmode")[0] + "devmode=" + Math.random().toString().slice(2,);
+        })
+    }
+}
+
+/*if (navigator.cookieEnabled){
+    let cookies = decodeURIComponent(document.cookie).split("; ");
+    cookies.forEach((element, idx, arr) => {
+        arr[idx] = element.split("=");
+    });
+    for (const cookie of cookies){
+        console.log(cookie);
+        addToMemoriseList(cookie[0], cookie[1]);
+    }
+}*/
 
 numpadBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {
@@ -52,12 +78,10 @@ submitBtn.addEventListener("click", () => {
     }
     else{
         inputErrorP.textContent = "";
-        memoriseList.push({"name": nameInput.value,
-                           "value": valueInput.value});
-                           addToMemoriseList(nameInput.value, valueInput.value);
-                        }
+        addToMemoriseList(nameInput.value, valueInput.value);
         nameInput.value = "";
         valueInput.value = "";
+    }
 })
 
 startBtn.addEventListener("click", () => {
@@ -121,18 +145,21 @@ function addToMemoriseList(name, value){
     // This creates the following structure:
     /*
     <div class="nameValue">
-        <div>
-            <p class="name">Name: pi</p>
-            <p class="value">Value: 31415926535</p>
-        </div>
-        <button class="delete">❌</button>
+    <div>
+    <p class="name">Name: pi</p>
+    <p class="value">Value: 31415926535</p>
+    </div>
+    <button class="delete">❌</button>
     </div>
     */
-    // 1st layer 
-    let outerDiv = document.createElement("div");
-    outerDiv.classList.add("nameValue");
-    // 2nd layer
-    let innerDiv = document.createElement("div");
+   // Add to list
+   memoriseList.push({"name": name,
+                      "value": value});
+   // 1st layer 
+   let outerDiv = document.createElement("div");
+   outerDiv.classList.add("nameValue");
+   // 2nd layer
+   let innerDiv = document.createElement("div");
     let delButton = document.createElement("button");
     delButton.classList.add("delete");
     delButton.textContent = "❌";
@@ -152,9 +179,14 @@ function addToMemoriseList(name, value){
     memoriseListDiv.appendChild(outerDiv);
     // Listen for delete button clicks
     delButton.addEventListener("click", (event) => {
+        console.log(memoriseList);
         memoriseList = memoriseList.filter((element) => {
-            return "Name: " + element.name != event.target.parentElement.children[0].children[0].textContent});
-        event.target.parentElement.children[0].children[0].textContent
+            const matchesListItem = ("Name: " + element.name == event.target.parentElement.children[0].children[0].textContent);
+//            if (matchesListItem){
+//                document.cookie = `${element.name}=${element.value}; expiry=Mon, 2 June 1001, 12:00:00 UTC; path=/`;
+//            }
+            return !matchesListItem
+        });
         event.target.parentElement.parentElement.removeChild(event.target.parentElement);
     });
 }
