@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Number Memorise</title>
+</head>
+<body>
+    <h1>Number Memorisation</h1>
+    <div id="container">
+        <div id="inputs">
+            <div>
+                <label>Name:</label>
+                <input id="nameInput" type="text">
+            </div>
+            <div>
+                <label>Value:</label>
+                <input id="valueInput" type="number">
+            </div>
+            <button type="button" id="submitBtn">Submit</button>
+            <p class="errorDisplay" id="inputError"></p>
+        </div>
+        <div id="inputDisplays">
+            <details id="memoriseList" open="">
+                <summary>Numbers to remember:</summary>
+            <!--<div class="nameValue">
+                    <div>
+                        <p class="name">Name: pi</p>
+                        <p class="value">Value: 31415926535</p>
+                    </div>
+                    <button class="delete">❌</button>
+                </div>-->
+            </details>
+            <button type="button" id="startBtn">Start</button>
+        </div>
+        <div id="numpad">
+            <p id="nameToRemember"></p><br>
+            <button class="num">9</button>
+            <button class="num">8</button>
+            <button class="num">7</button><br>
+            <button class="num">6</button>
+            <button class="num">5</button>
+            <button class="num">4</button><br>
+            <button class="num">3</button>
+            <button class="num">2</button>
+            <button class="num">1</button><br>
+            <button class="num">-</button>
+            <button class="num">0</button>
+            <button class="num">.</button><br>
+            <p id="writtenNumber"></p>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

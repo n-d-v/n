@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    text-align: center;
+    background-color: #000;
+    font-family: 'Courier New', Courier, monospace;
+}
+h1{
+    color: hsl(110, 100%, 80%);
+    font-size: 3em;
+    margin: 15px;
+}
+#container{
+    display: block;
+    position: absolute;
+    width: clamp(50%, 30em, calc(90% - 35px));
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: hsl(219, 86%, 14%);
+    padding: 35px;
+    border-radius: 20px;
+    border-style: solid;
+    border-bottom-style: dashed;
+    border-right-style: dashed;
+    border-width: 5px;
+    border-color: hsl(219, 100%, 28%);
+    box-shadow: 10px 10px 15px hsla(219, 100%, 25%, 0.5);
+}
+label{
+    color: hsl(110, 100%, 90%);
+    font-size: 2em;
+}
+input{
+    font-size: 1em;
+}
+summary{
+    color: hsl(110, 100%, 95%);
+}
+button{
+    background-color: hsl(111, 100%, 7%);
+    color: hsl(110, 90%, 80%);
+    font-size: 2em;
+    padding: 10px;
+    margin: 4px;
+    border-radius: 20px;
+}
+div#numpad button.num{
+    width: 2em;
+}
+#memoriseList{
+    margin: 20px;
+}
+#startBtn{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: hsl(111, 100%, 13%);
+}
+#startBtn.stop{
+    background-color: hsl(19, 100%, 13%);
+    color: hsl(19, 90%, 80%);
+}
+#submitBtn{
+    margin-top: 20px;
+    background-color: hsl(111, 100%, 13%);
+}
+#inputs, #numpad, #inputDisplays{
+    display: inline-block;
+    background-color: #0004;
+    padding: 10px;
+    border-radius: 20px;
+}
+#numpad, #inputDisplays{
+    min-width: 45%;
+    width: fit-content;
+}
+#inputDisplays{
+    position: relative;
+    margin-top: 40px;
+    bottom: 20px;
+}
+#numpad{
+    position: relative;
+    bottom: -14px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+#inputs div{
+    display: inline-block;
+}
+.nameValue{
+    background-color: #FFF3;
+    padding: 5px;
+    padding-top: 15px;
+    border-radius: 20px;
+}
+.nameValue div p{
+    display: block;
+    position: relative;
+    width: fit-content;
+    color: hsl(64, 100%, 80%);
+    background-color: hsl(103, 100%, 6%);
+    padding: 4px;
+    border-radius: 10px;
+    left: 0;
+}
+.nameValue div{
+    display: inline-block;
+    position: relative;
+    width: fit-content;
+}
+.delete{
+    display: inline-block;
+    position: relative;
+    font-size: 1.5em;
+    top: -5px;
+    right: 0;
+    left: auto;
+    width: fit-content;
+}
+.errorDisplay{
+    color: hsl(0, 57%, 47%);
+    font-size: 1.5em;
+    font-weight: bold;
+}
+#nameToRemember, #writtenNumber{
+    display: inline-block;
+    font-size: 2em;
+    overflow-wrap: break-word;
+    max-width: 9em;
+}
+#nameToRemember{
+    color: hsl(244, 100%, 59%);
+}
+#writtenNumber{
+    color: hsl(244, 100%, 65%);
+    margin-top: 15px;
+    font-weight: bold;
+}
