@@ -45,6 +45,8 @@ submitBtn.addEventListener("click", () => {
                            "value": valueInput.value});
                            addToMemoriseList(nameInput.value, valueInput.value);
                         }
+        nameInput.value = "";
+        valueInput.value = "";
 })
 
 startBtn.addEventListener("click", () => {
@@ -74,8 +76,13 @@ function stopGame(type){
     gameRunning = false;
     startBtn.classList.remove("stop");
     startBtn.textContent = "Start";
-    nameToRememberP.textContent = "Completed!";
     memoriseListDiv.style.display = "";
+    if (type == "win"){
+        nameToRememberP.textContent = "Completed!";
+    }
+    else if (type == "manual"){
+        nameToRememberP.textContent = "Game ended.";
+    }
     setTimeout(() => {
         if (!gameRunning){
             nameToRememberP.textContent = "";
