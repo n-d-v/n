@@ -2,6 +2,11 @@
     margin: 0;
     padding: 0;
 }
+.noselect{
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
 body{
     text-align: center;
     background-color: #000;
@@ -28,9 +33,22 @@ h1{
     border-color: hsl(219, 100%, 28%);
     box-shadow: 10px 10px 15px hsla(219, 100%, 25%, 0.5);
 }
-label{
+label.inputLabel{
     color: hsl(110, 100%, 90%);
     font-size: 2em;
+}
+label.radioLabel{
+    color: hsl(80, 100%, 90%);
+    font-size: 1.5em;
+}
+div.radioInputWrapper{
+    display: inline-block;
+    width: fit-content;
+    background-color: #0F02;
+    padding: 7px;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-size: 0.75em;
 }
 input{
     font-size: 1em;
@@ -83,9 +101,6 @@ div#numpad button.num{
 #numpad{
     position: relative;
     bottom: -14px;
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
 }
 #inputs div{
     display: inline-block;

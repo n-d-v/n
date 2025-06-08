@@ -9,32 +9,46 @@
 <body>
     <h1>Number Memorisation</h1>
     <div id="container">
-        <div id="inputs">
+        <div id="inputs" class="noselect">
             <div>
-                <label>Name:</label>
+                <label class="inputLabel">Name:</label>
                 <input id="nameInput" type="text">
             </div>
             <div>
-                <label>Value:</label>
+                <label class="inputLabel">Value:</label>
                 <input id="valueInput" type="number">
             </div>
             <button type="button" id="submitBtn">Submit</button>
             <p class="errorDisplay" id="inputError"></p>
         </div>
         <div id="inputDisplays">
-            <details id="memoriseList" open="">
-                <summary>Numbers to remember:</summary>
-            <!--<div class="nameValue">
-                    <div>
-                        <p class="name">Name: pi</p>
-                        <p class="value">Value: 31415926535</p>
+            <div id="settings">
+                <details id="memoriseList">
+                    <summary>Numbers to remember:</summary>
+                <!--<div class="nameValue">
+                        <div>
+                            <p class="name">Name: pi</p>
+                            <p class="value">Value: 31415926535</p>
+                        </div>
+                        <button class="delete">❌</button>
+                    </div>-->
+                </details>
+                <details class="noselect" open="">
+                    <summary>Gamemode settings:</summary>
+                    <div class="radioInputWrapper">
+                        <input type="radio" id="repeatOnce" name="gamemode" checked>
+                        <label class="radioLabel" for="repeatOnce">Once</label>
                     </div>
-                    <button class="delete">❌</button>
-                </div>-->
-            </details>
+                    <div class="radioInputWrapper">
+                        <input type="radio" id="repeatInfinite" name="gamemode">
+                        <label class="radioLabel" for="repeatInfinite">Infinite</label>
+                    </div><br>
+                </details>
+            </div>
+
             <button type="button" id="startBtn">Start</button>
         </div>
-        <div id="numpad">
+        <div id="numpad" class="noselect">
             <p id="nameToRemember"></p><br>
             <button class="num">9</button>
             <button class="num">8</button>

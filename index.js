@@ -2,11 +2,17 @@ const submitBtn = document.getElementById("submitBtn");
 const startBtn = document.getElementById("startBtn");
 const nameInput = document.getElementById("nameInput");
 const valueInput = document.getElementById("valueInput");
-const memoriseListDiv = document.getElementById("memoriseList");
+
+const repeatOnceRadio = document.getElementById("repeatOnce");
+const repeatInfiniteRadio = document.getElementById("repeatInfinite");
+
 const nameToRememberP = document.getElementById("nameToRemember");
 const writtenNumberP = document.getElementById("writtenNumber");
 const inputErrorP = document.getElementById("inputError");
+
 const numpadBtns = document.querySelectorAll(".num");
+const memoriseListDiv = document.getElementById("memoriseList");
+const settingsDiv = document.getElementById("settings");
 
 let memoriseList = [];
 let nameToRemember;
@@ -21,7 +27,12 @@ numpadBtns.forEach((btn) => {
                 writtenNumberP.textContent += inputKey;
                 nameToRememberIdx++;
                 if (nameToRememberIdx >= nameToRemember.value.length){
-                    stopGame("win");
+                    if (repeatOnceRadio.checked){
+                        stopGame("win");
+                    }
+                    else if (repeatInfiniteRadio.checked){
+                        stopGame("restart");
+                    }
                 }
             }
             else {
@@ -52,18 +63,10 @@ submitBtn.addEventListener("click", () => {
 startBtn.addEventListener("click", () => {
     if (memoriseList.length > 0){
         if (gameRunning){
-            
             stopGame("manual");
         }
         else{
-
-            nameToRemember = memoriseList[Math.floor(Math.random() * memoriseList.length)];
-            nameToRememberP.textContent = "What is the value of: " + nameToRemember.name;
-            nameToRememberIdx = 0;
-            memoriseListDiv.style.display = "none";
-            gameRunning = true;
-            startBtn.classList.add("stop");
-            startBtn.textContent = "Stop";
+            startGame()
         }
     }
 })
@@ -72,25 +75,46 @@ function stopGame(type){
     // the value of type can be:
     //  "manual" - when the user clicks the stop button
     //  "restart" - when the game starts again from infinite repeat mode
-    //  "win" - when the game ends  
-    gameRunning = false;
-    startBtn.classList.remove("stop");
-    startBtn.textContent = "Start";
-    memoriseListDiv.style.display = "";
-    if (type == "win"){
+    //  "win" - when the game ends
+    if (type == "restart"){
         nameToRememberP.textContent = "Completed!";
-    }
-    else if (type == "manual"){
-        nameToRememberP.textContent = "Game ended.";
-    }
-    setTimeout(() => {
-        if (!gameRunning){
-            nameToRememberP.textContent = "";
-        }
-        if (writtenNumberP.textContent == nameToRemember){
+        setTimeout(() => {
+            nameToRememberP.textContent = "Get ready!";
             writtenNumberP.textContent = "";
+            setTimeout(startGame, 1000);
+        }, 1500);
+    }
+    else{
+        gameRunning = false;
+        startBtn.classList.remove("stop");
+        startBtn.textContent = "Start";
+        settingsDiv.style.display = "";
+        if (type == "win"){
+            nameToRememberP.textContent = "Completed!";
         }
-    }, 2500);
+        else if (type == "manual"){
+            nameToRememberP.textContent = "Game ended.";
+        }
+        setTimeout(() => {
+            if (!gameRunning){
+                nameToRememberP.textContent = "";
+            }
+            if (writtenNumberP.textContent == nameToRemember){
+                writtenNumberP.textContent = "";
+            }
+        }, 2500);
+    }
+}
+
+function startGame(){
+
+    nameToRemember = memoriseList[Math.floor(Math.random() * memoriseList.length)];
+    nameToRememberP.textContent = "What is the value of: " + nameToRemember.name;
+    nameToRememberIdx = 0;
+    settingsDiv.style.display = "none";
+    gameRunning = true;
+    startBtn.classList.add("stop");
+    startBtn.textContent = "Stop";
 }
 
 function addToMemoriseList(name, value){
