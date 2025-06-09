@@ -34,16 +34,18 @@ if (window.location.toString().split("?").length > 1){
     }
 }
 
-/*if (navigator.cookieEnabled){
+if (navigator.cookieEnabled){
     let cookies = decodeURIComponent(document.cookie).split("; ");
     cookies.forEach((element, idx, arr) => {
         arr[idx] = element.split("=");
     });
     for (const cookie of cookies){
-        console.log(cookie);
-        addToMemoriseList(cookie[0], cookie[1]);
+        if (cookie[1] != ""){
+            console.log(cookie);
+            addToMemoriseList(cookie[0], cookie[1]);
+        }
     }
-}*/
+}
 
 numpadBtns.forEach((btn) => {
     btn.addEventListener("click", (event) => {
@@ -152,14 +154,15 @@ function addToMemoriseList(name, value){
     <button class="delete">❌</button>
     </div>
     */
-   // Add to list
-   memoriseList.push({"name": name,
-                      "value": value});
-   // 1st layer 
-   let outerDiv = document.createElement("div");
-   outerDiv.classList.add("nameValue");
-   // 2nd layer
-   let innerDiv = document.createElement("div");
+    // Add to list
+    memoriseList.push({"name": name,
+                       "value": value});
+    document.cookie = `${name}=${value}; expiry=${new Date(Number(new Date()) + (30 * 24 * 60 * 60 * 1000))}; path=/`;
+    // 1st layer 
+    let outerDiv = document.createElement("div");
+    outerDiv.classList.add("nameValue");
+    // 2nd layer
+    let innerDiv = document.createElement("div");
     let delButton = document.createElement("button");
     delButton.classList.add("delete");
     delButton.textContent = "❌";
@@ -182,9 +185,9 @@ function addToMemoriseList(name, value){
         console.log(memoriseList);
         memoriseList = memoriseList.filter((element) => {
             const matchesListItem = ("Name: " + element.name == event.target.parentElement.children[0].children[0].textContent);
-//            if (matchesListItem){
-//                document.cookie = `${element.name}=${element.value}; expiry=Mon, 2 June 1001, 12:00:00 UTC; path=/`;
-//            }
+            if (matchesListItem){
+                document.cookie = `${element.name}=; expiry=Mon, 2 June 1001, 12:00:00 UTC; path=/`;
+            }
             return !matchesListItem
         });
         event.target.parentElement.parentElement.removeChild(event.target.parentElement);
