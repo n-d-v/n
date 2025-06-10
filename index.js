@@ -29,7 +29,7 @@ if (window.location.toString().split("?").length > 1){
         devmodeReloadBtn.href = window.location.toString().split("devmode")[0] + "devmode" + Math.random().toString().slice(2,);
         devmodeDiv.style.display = "";
         devmodeReloadBtn.addEventListener("mouseover", () => {
-            devmodeReloadBtn.href = window.location.toString().split("devmode")[0] + "devmode=" + Math.random().toString().slice(2,);
+            devmodeReloadBtn.href = window.location.toString().split("devmode")[0] + "devmode&" + Math.random().toString().slice(2,);
         })
     }
 }
@@ -40,7 +40,7 @@ if (navigator.cookieEnabled){
         arr[idx] = element.split("=");
     });
     for (const cookie of cookies){
-        if (cookie[1] != ""){
+        if (cookie[1] !== undefined){
             console.log(cookie);
             addToMemoriseList(cookie[0], cookie[1]);
         }
@@ -186,7 +186,7 @@ function addToMemoriseList(name, value){
         memoriseList = memoriseList.filter((element) => {
             const matchesListItem = ("Name: " + element.name == event.target.parentElement.children[0].children[0].textContent);
             if (matchesListItem){
-                document.cookie = `${element.name}=; expiry=Mon, 2 June 1001, 12:00:00 UTC; path=/`;
+                document.cookie = `${element.name}; expiry=Mon, 2 June 1001, 12:00:00 UTC; path=/`;
             }
             return !matchesListItem
         });
