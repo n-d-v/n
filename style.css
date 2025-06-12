@@ -25,6 +25,8 @@ body{
     text-align: center;
     background-color: #000;
     font-family: 'Courier New', Courier, monospace;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 h1{
     color: hsl(110, 100%, 80%);
@@ -34,7 +36,7 @@ h1{
 #container{
     display: block;
     position: absolute;
-    width: clamp(50%, 30em, calc(90% - 35px));
+    width: clamp(50%, 30em, calc(100% - 70px));
     left: 50%;
     transform: translateX(-50%);
     background-color: hsl(219, 86%, 14%);
@@ -46,6 +48,16 @@ h1{
     border-width: 5px;
     border-color: hsl(219, 100%, 28%);
     box-shadow: 10px 10px 15px hsla(219, 100%, 25%, 0.5);
+}
+@media only screen and (max-width: 560px){
+    #container{
+        width: calc(100% - 80px);
+        left: 0%;
+        transform: none;
+    }
+    h1{
+        font-size: 10vw;
+    }
 }
 label.inputLabel{
     color: hsl(110, 100%, 90%);
